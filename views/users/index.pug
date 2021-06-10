@@ -1,0 +1,29 @@
+extends ../layouts/common.pug
+block content
+    h1 Users
+
+    .d-flex
+        a(href="/users/create") new user
+        form.ml-auto(action='/users/search', method='GET', class='d-flex') 
+            input.mr-2(type="text" name='q', class='form-control')
+            button(class='btn btn-primary') Search
+    
+    table.table
+        thead
+            tr
+                th(scope='col') #
+                th(scope='col') Name
+                th(scope='col') Phone Number
+                th(scope='col') Detail
+        tbody
+        each user in users
+            tr
+                th(scope='row')=user.id
+                td= user.name
+                td 01232312
+                td 
+                    a.btn.btn-primary(href='/users/ ' +user.id) View
+            
+
+
+
