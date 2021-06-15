@@ -2,7 +2,19 @@ extends ../layouts/common.pug
 block content
     h1 Create User 
 
+    if errors
+        each error in errors
+            .alert.alert-danger= error
+  
     form(action="/users/create", method="POST" )
-        label Name
-        input(type="text" name='name') 
-        button Create
+        .form-group
+            label(for='exampleInputEmail1') User Name
+            input#exampleInputEmail1.form-control(type='text', aria-describedby='emailHelp', placeholder='Name' , name='name')
+            small#emailHelp.form-text.text-muted We&apos;ll never share your email with anyone else.
+        .form-group
+            label(for='exampleInputPassword1') Phone Number
+            input#exampleInputPassword1.form-control(type='password', placeholder='Phone', name='phone')
+        .form-check
+            input#exampleCheck1.form-check-input(type='checkbox')
+            label.form-check-label(for='exampleCheck1') Check me out
+        button.btn.btn-primary(type='submit') Create
