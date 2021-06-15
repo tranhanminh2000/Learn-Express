@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 var bodyParser = require('body-parser')
-
+var cookie = require('cookie-parser')
 var userRoute = require('./routes/user.route')
 
 const port =3000;
@@ -12,7 +12,7 @@ app.set('views', './views');
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
-
+app.use(cookie())
 app.get('/' , function(req, res){
     res.render('index.pug', {
         name : 'Get start'

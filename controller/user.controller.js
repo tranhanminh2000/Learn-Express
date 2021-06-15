@@ -5,6 +5,8 @@ let users = [
     { id: 3, name: 'Anh',  phone: '67622233'}
 ]
 module.exports.index = function(req , res) {
+    console.log(req.cookies)
+    
     res.render('users/index', { 
         users: users
     })
