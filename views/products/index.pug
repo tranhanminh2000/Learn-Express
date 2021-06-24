@@ -1,0 +1,65 @@
+extends ../layouts/common.pug
+block content
+    h1 Product
+    if(message)
+        .alert.alert-danger= message
+    else  
+        .d-flex
+            form.ml-auto(method='GET', class='d-flex') 
+                input(type="text" name='q', class='form-control')
+                button(class='btn btn-primary') Search
+        .row
+                for item in products
+                    .col-md-auto
+                        .card(style="width: 14rem;display:inline-block")
+                            img(src=item.img_product class="card-img-top" alt="...")
+                            .card-body
+                                h5(class="card-title")=item.name_product
+                                p(class="card-text" style='font-size: 1rem')=item.descript_product
+                                p(class="card-text" style='font-size: 1rem;color:red')=item.price_product
+                                a(href="#" class="btn btn-primary") Buy now
+        
+        nav(aria-label="Page navigation example")
+            ul(class="pagination")
+                //Pre page
+                if(query <= 1)
+                    li(class="page-item" style="display:none")
+                        a(class="page-link" href='/products?page=' + (query-1)) Pre
+                else
+                    li(class="page-item")
+                        a(class="page-link" href='/products?page=' + (query-1)) Pre
+
+                //Page number
+                if(query>=1 && query <=3)
+                    -for(var i = 1; i <= 5 ; i++)
+                        if(i == query)
+                            li(class="page-item active")
+                                a(class="page-link" href='/products?page=' + i)= i
+                        else
+                            li(class="page-item")
+                                a(class="page-link" href='/products?page=' + i)= i
+                if(query > 3 && query < pagesLength-2)
+                     -for(var i = query-2; i <= query+2 ; i++)
+                        if(i == query)
+                            li(class="page-item active")
+                                a(class="page-link" href='/products?page=' + i)= i
+                        else
+                            li(class="page-item")
+                                a(class="page-link" href='/products?page=' + i)= i
+        
+                if(query >= pagesLength-2)
+                    -for(var i = query-2; i <= pagesLength ; i++)
+                        if(i == query)
+                            li(class="page-item active")
+                                a(class="page-link" href='/products?page=' + i)= i
+                        else
+                            li(class="page-item")
+                                a(class="page-link" href='/products?page=' + i)= i
+
+                //Next page
+                if(query >= pagesLength)  
+                    li(class="page-item" style='display:none')
+                        a(class="page-link" href='/products?page=' + (query+1)) Next
+                else
+                    li(class="page-item")
+                        a(class="page-link" href='/products?page=' + (query+1)) Next
